@@ -1,7 +1,8 @@
 import React from "react";
 import {
   StyleSheet,
-  Text,
+  Linking ,
+  Button,
   View,
   Platform,
   KeyboardAvoidingView
@@ -59,6 +60,18 @@ export default class App extends React.Component {
   render() {
     return (
       <View style={styles.container}>
+      <Button
+      title="Open Skype"
+      onPress={() => {
+        let url = 'https://join.skype.com/bot/30761d30-be33-4541-8b7d-d9a2c106abf9'
+        Linking.canOpenURL(url).then(supported=> {
+        if (!supported) {
+          console.log('Can\'t handle url: ' + url);
+        } else {
+          return Linking.openURL(url);
+        }
+        }).catch(err => console.error('An error occurred', err));
+      }}/>
         <GiftedChat
           user={{
             _id: 1
